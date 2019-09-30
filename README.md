@@ -9,6 +9,12 @@
 
 今後は、自治体の条例などにも適用することで、地域の課題解決支援や、法令・条例に関するQAチャットボットなどの開発を考えています。
 
+## 問い合わせ
+本データセットについての問い合わせは以下にお願いします。
+
+株式会社 富士通研究所
+lod4all-contact [at] ml.labs.fujitsu.com
+
 ## ライセンス
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
 
