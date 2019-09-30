@@ -1,1 +1,1 @@
-# e-laws-lod
+# 日本の法令LOD
