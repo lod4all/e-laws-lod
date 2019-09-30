@@ -18,13 +18,50 @@ lod4all-contact [at] ml.labs.fujitsu.com ( [at] を@に置き換えてくださ�
 ## ライセンス
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
 
-## データセットとスキーマ
+## データセットとデータ例
 - defword.ttl: 用語定義
+```
+@prefix law: <http://lod4all.net/law/resource/> .
+@prefix lawp: <http://lod4all.net/law/property/> .
+@prefix lawo: <http://lod4all.net/law/ontology/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix oa: <http://www.w3.org/ns/oa#> . 
+
+law:338M50000100046_5-3_1_d1_25
+  rdf:type oa:Annotation, lawo:Definition;
+  oa:motivatedBy oa:lidentifying;
+  oa:hasTarget [a oa:SpecificResource; oa:hasSource law:338M50000100046_5-3_1_s1; 
+                           oa:hasSelector [oa:start 0; oa:end 30]];
+  oa:hasBody [lawp:term "相談員"; 
+                        lawp:body "法第八条の二第二項の戦傷病者相談員（以下「相談員」という。）"].
+
+
+law:338M50000100046_11_1_2_d1_26
+  rdf:type oa:Annotation, lawo:Definition;
+  oa:motivatedBy oa:lidentifying;
+  oa:hasTarget [a oa:SpecificResource; oa:hasSource law:338M50000100046_11_1_2_s1; 
+                           oa:hasSelector [oa:start 0; oa:end 31]];
+  oa:hasBody [lawp:term "遺族"; 
+                        lawp:body "請求者が法第十九条第三項に規定する遺族（以下「遺族」という。）"].
+```
 - lawnumname.ttl:
+```
+```
 - lawstruct.ttl: 
+```
+```
 - link.nt: DBpedia Japaneseとのリンク
+```
+```
 - reflaw.ttl: 
+```
+```
 - refterm.ttl:
+```
+```
 - sentence.ttl:
+```
+```
 
 ## 利用例(サンプルSPARQL)
