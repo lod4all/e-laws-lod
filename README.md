@@ -18,6 +18,13 @@ lod4all-contact [at] ml.labs.fujitsu.com ( [at] を@に置き換えてくださ�
 ## ライセンス
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
 
-## データスキーマ
+## データセットとスキーマ
+- defword.ttl: 用語定義
+- lawnumname.ttl:
+- lawstruct.ttl: 
+- link.nt: DBpedia Japaneseとのリンク
+- reflaw.ttl: 
+- refterm.ttl:
+- sentence.ttl:
 
 ## 利用例(サンプルSPARQL)
