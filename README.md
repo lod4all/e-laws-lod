@@ -13,7 +13,7 @@
 本データセットについての問い合わせは以下にお願いします。
 
 株式会社 富士通研究所
-lod4all-contact [at] ml.labs.fujitsu.com
+lod4all-contact [at] ml.labs.fujitsu.com ( [at] を@に置き換えてください。)
 
 ## ライセンス
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
