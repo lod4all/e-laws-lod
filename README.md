@@ -18,7 +18,8 @@ lod4all-contact [at] ml.labs.fujitsu.com ( [at] を@に置き換えてくださ�
 ## ライセンス
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
 
-## 名前空間
+## データセットの説明
+### 名前空間
 
 ```turtle
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -41,12 +42,12 @@ prefix cnt: <http://www.w3.org/2011/content#>
 - oa: リンク、用語定義などをアノテーション形式で定義する
 - doco:、cnt: 法令文を定義する
 
-## 基本概念体系 
+### 基本概念体系 
 * 法令(lawo:Law)
 * 条項号(lawo:Clause)
 
 
-## 法令名称から法令情報の取得
+### 法令名称から法令情報の取得
 
 ```sparql
 prefix law: <http://lod4all.net/law/resource/>
@@ -66,7 +67,7 @@ Subject として
 http://lod4all.net/law/resource/332AC0000000026とhttp://lod4all.net/law/resource/昭和２１年法律第１５号★　が取得される。後者は　lawp:del_flg 1 により廃止法令であることがわかる。
 
 
-## 特定の法令のある条項の文章の取得
+### 特定の法令のある条項の文章の取得
 ```sparql
 prefix law: <http://lod4all.net/law/resource/>
 prefix lawp: <http://lod4all.net/law/property/>
@@ -88,7 +89,8 @@ cnt:chars ?sentence .
  - 条項でソートできるように、条、項、号を抜き出しておくことが必要か？
  - IDで処理しているが、ID以外で処理できるような構造にする
 
-## 法令による定義語の違い
+## SPARQL例
+### 法令による定義語の違い
 
 ```sparql
 prefix law: <http://lod4all.net/law/resource/>
