@@ -118,14 +118,3 @@ select ?law ?body
      ?at lawp:law/rdfs:label ?law
   } 
 ```
-
-### 特定の法令を参照している法令の取得（未更新）
-```
-select * 
-  where {
-    []
-    oa:motivatedBy oa:linking;
-    oa:hasTarget/oa:hasSource/lawp:clause/lawp:upper* law:332AC0000000026; 
-    oa:hasBody ?from.
-  } 
-```
