@@ -18,7 +18,7 @@ http://lod4all.net/law/rdf/e-laws-lod.tar.gz
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
 
 ## 問い合わせ
-本データセットについての問い合わせは、以下にお願いします。
+本データセットについての問い合わせは、Issueもしくは、以下のメールアドレスにお願いします。
 
 株式会社 富士通研究所
 lod4all-contact [at] ml.labs.fujitsu.com ( [at] を@に置き換えてください。)
