@@ -18,7 +18,8 @@ lod4all-contact [at] ml.labs.fujitsu.com ( [at] を@に置き換えてくださ�
 ## ライセンス
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
 
-## データセットの説明
+## データセット説明
+
 ### 名前空間
 
 ```turtle
@@ -46,6 +47,8 @@ prefix cnt: <http://www.w3.org/2011/content#>
 * 法令(lawo:Law)
 * 条項号(lawo:Clause)
 
+## SPARQL例
+ 以下に、取得例のSPARQLを記載します。
 
 ### 法令名称から法令情報の取得
 
@@ -88,9 +91,6 @@ cnt:chars ?sentence .
  
  - 条項でソートできるように、条、項、号を抜き出しておくことが必要か？
  - IDで処理しているが、ID以外で処理できるような構造にする
-
-## SPARQL例
- 以下に、取得例のSPARQLを記載します。
 
 ### 法令による定義語の違い
 
