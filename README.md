@@ -62,8 +62,9 @@ prefix oa: <http://www.w3.org/ns/oa#>
   
 select * 
   where {
-?s  lawp:lawTitle "租税特別措置法";
-     ?p ?o} order by ?s
+     ?s  lawp:lawTitle "租税特別措置法";
+     ?p ?o
+  } order by ?s
 ```
 
 Subject として
@@ -83,10 +84,10 @@ prefix doco: <http://purl.org/spar/doco/>
   
 select * 
   where {
-?s a doco:Sentence;
-lawp:clause/lawp:upper*  law:332AC0000000026_70-4;
-cnt:chars ?sentence .
- } 
+     ?s a doco:Sentence;
+        lawp:clause/lawp:upper*  law:332AC0000000026_70-4;
+        cnt:chars ?sentence .
+     } 
 ```
  
  - 条項でソートできるように、条、項、号を抜き出しておくことが必要か？
@@ -106,21 +107,20 @@ prefix doco: <http://purl.org/spar/doco/>
   
 select ?law ?body 
   where {
-[] oa:hasBody [lawp:term "内国法人"; 
+     [] oa:hasBody [lawp:term "内国法人"; 
                         lawp:body ?body];
- oa:hasTarget/oa:hasSource ?at .
-?at lawp:law/rdfs:label ?law
- } 
+     oa:hasTarget/oa:hasSource ?at .
+     ?at lawp:law/rdfs:label ?law
+  } 
 ```
 
- 
 ### 特定の法令を参照している法令の取得（未更新）
 ```
 select * 
   where {
-[]
-  oa:motivatedBy oa:linking;
-  oa:hasTarget/oa:hasSource/lawp:clause/lawp:upper* law:332AC0000000026; 
-  oa:hasBody ?from.
- } 
+    []
+    oa:motivatedBy oa:linking;
+    oa:hasTarget/oa:hasSource/lawp:clause/lawp:upper* law:332AC0000000026; 
+    oa:hasBody ?from.
+  } 
 ```
