@@ -30,6 +30,7 @@ lod4all-contact [at] ml.labs.fujitsu.com ( [at] を@に置き換えてくださ�
 ```turtle
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix time: <http://www.w3.org/2006/time#>
 
 prefix law: <http://lod4all.net/law/resource/>
 prefix lawp: <http://lod4all.net/law/property/>
@@ -49,8 +50,72 @@ prefix cnt: <http://www.w3.org/2011/content#>
 - doco:、cnt: 法令文を定義する
 
 ### 基本概念体系 
-* 法令(lawo:Law)
-* 条項号(lawo:Clause)
+#### 法令(lawo:Law): 法令
+- IRI: law:法令ID。eLawsの法令IDがないときは、法令番号
+- lawp:lawNum　法令番号
+- lawp:lawTitle 法令名称。rdfs:labelにも設定
+- lawp:altLabelに略称（複数あり得る）
+- lawp:lawID eLawsのID
+- lawp:del_flg 廃止法令なら１、有効法令なら0
+- lawp:year 年号のURI
+- lawp:lawTpe 法令種別(lawo:LawType)
+- lawp:detailedLawType 詳細法令種別（リテラル）
+- lawp:rationale 根拠法令（施行規則に対しては施行令、施行令に対しては法律）
+- rdfs:seeAlso DBpedia
+
+
+#### 条項号(lawo:Clause)：条、項、号のいずれか
+- IRI: law:法令ID_条_項_号（必要なところまで）。号レベルまで。枝番はハイフンで示す（例：70条の4 → 70-4）。附則は条の前にspを付与（例：附則２条 sp2）
+- lawp:clauseTypeで、条(lawo:Article）、項（lawo:Paragraph）、号（lawo:Item）のいずれかを設定する
+- lawp:lawでその条項号が属する法令（lawo:Law)を設定
+- lawp:upperで直接上位の条、項ないし法令を設定
+- lawp:prev で条項号同レベルの前の条項号を設定
+- lawp:htmlでこの条項号を含む条単位の解析済みhtmlのURI
+- lawp:article, lawp:paragraph, lawp:item に条、項、号の番号（"2", "2-2"などの文字列）を持つ
+-  lawp:index 条項号の順序を示すための整数値
+
+#### 法令文(doco:Sentence)
+- cnt:chars に文の文字列、lawp:clauseにその文が属している条項号(lawo:Clause)、lawp:lawにその文が属している法令(lawo:Law)を持つ。doco:indexに条項号の中の文番号を与える。
+
+#### 法令参照(lawo:ReferLaw, oa:Annotation)
+- oa:hasTargetの先に参照元の法令文字列参照、oa:hasBodyの先に参照先の法令(lawo:Law)を持つ
+- oa:motivatedBy　は oa:linking
+
+#### 委任規定(lawo:Delegation, oa:Annotation)
+- oa:hasTargetの先に参照元の委任規定、oa:hasBodyの先に委任先の法令(lawo:Law)を持つ
+- oa:motivatedBy　は oa:linking
+
+#### 法令文字列参照(oa:SpecificResource)
+- oa:hasSourceの先に法令文(doco:Sentence)、oa:hasSelectorの先にoa:startとoa:endで文字列中の位置を示す
+- 値付き法令文字列参照：法令文字列参照のoa:hasSelectorの先に、オフセットだけでなく、具体的な文字列を rdf:value　として持たせることがある（検索などのため）
+
+#### 定義規定(lawo:Definition, oa:Annotation)
+- oa:motivatedBy は oa:lidentifying
+- oa:hasTargetの先に定義規定全体の法令文字列参照
+- oa:hasBodyの先に定義規定の各種情報。lawp:termに定義語文字列、lawp:bodyに定義規定本文、lawp:scopeに定義規定本文から定義語の有効範囲を示す文字列
+
+#### 定義語参照(lawo:ReferTerm, oa:Annotation)
+- oa:motivatedBy は oa:lidentifying
+- - oa:hasTargetの先に定義語を使用している部分の法令文字列参照
+- oa:hasBodyの先に定義規定(lawo:Definition）のURI
+
+#### 文構造情報(lawo:Struct, oa:Annotation)
+- oa:motivatedByはoa:taggingを設定
+- oa:hasTargetの先に法令文字列参照（文字列範囲）
+- oa:hasBody に構造タグ
+
+#### 並列構造情報(lawo:Parallel, oa:Annotation)
+- oa:motivatedByはoa:describingを設定
+- oa:hasTargetの先に並列構造の全体。値付き法令文字列参照
+- oa:hasBody の先に並列構造の部分情報として、lawp:firstが最初の並列要素の文字列。lawp:lastが最後の並列要素の文字列。lawp:parallelmarkerが並立接続詞類のURI。
+
+#### その他
+
+- 年号（lawo:Nengo） 
+-- time:year で西暦年
+
+- 並立接続詞類(lawo:ParallelMarker)
+- 文構造タグ
 
 ## SPARQL例
  以下に、取得例のSPARQLを記載します。
@@ -67,9 +132,8 @@ prefix oa: <http://www.w3.org/ns/oa#>
   
 select * 
   where {
-     ?s  lawp:lawTitle "租税特別措置法";
-     ?p ?o
-  } order by ?s
+?s  lawp:lawTitle "租税特別措置法";
+     ?p ?o} order by ?s
 ```
 
 Subject として
@@ -87,12 +151,17 @@ prefix oa: <http://www.w3.org/ns/oa#>
 prefix cnt: <http://www.w3.org/2011/content#> 
 prefix doco: <http://purl.org/spar/doco/>
   
-select * 
+select ?para ?item ?p ?o ?sentence 
   where {
-     ?s a doco:Sentence;
-        lawp:clause/lawp:upper*  law:332AC0000000026_70-4;
-        cnt:chars ?sentence .
-     } 
+?s a doco:Sentence;
+cnt:chars ?sentence;
+lawp:clause ?clause .
+?clause lawp:upper*  law:332AC0000000026_70-4;
+lawp:index ?index;
+lawp:paragraph ?para;
+lawp:item ?item.
+?s ?p ?o .
+ } ORDER BY ?index
 ```
  
  - 条項でソートできるように、条、項、号を抜き出しておくことが必要か？
@@ -112,9 +181,9 @@ prefix doco: <http://purl.org/spar/doco/>
   
 select ?law ?body 
   where {
-     [] oa:hasBody [lawp:term "内国法人"; 
+[] oa:hasBody [lawp:term "内国法人"; 
                         lawp:body ?body];
-     oa:hasTarget/oa:hasSource ?at .
-     ?at lawp:law/rdfs:label ?law
-  } 
+ oa:hasTarget/oa:hasSource ?at .
+?at lawp:law/rdfs:label ?law
+ } 
 ```
