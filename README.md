@@ -135,6 +135,30 @@ select *
      ?p ?o} order by ?s
 ```
 
+#### 実行例
+| s                                                      | p                                               | o                                             |
+|--------------------------------------------------------|-------------------------------------------------|-----------------------------------------------|
+| http://lod4all.net/law/resource/332AC0000000026        | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://lod4all.net/law/ontology/Law           |
+| http://lod4all.net/law/resource/332AC0000000026        | http://www.w3.org/2000/01/rdf-schema#label      | 租税特別措置法                                |
+| http://lod4all.net/law/resource/332AC0000000026        | http://www.w3.org/2000/01/rdf-schema#seeAlso    | http://ja.dbpedia.org/resource/租税特別措置法 |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/del_flg         | 0                                             |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/detailedLawType | 法律                                          |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/lawID           | 332AC0000000026                               |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/lawNum          | 昭和三十二年法律第二十六号                    |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/lawTitle        | 租税特別措置法                                |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/lawType         | http://lod4all.net/law/ontology/Act           |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/year            | http://lod4all.net/law/ontology/昭和32        |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/altLabel        | 租特法                                        |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://lod4all.net/law/ontology/Law           |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://www.w3.org/2000/01/rdf-schema#label      | 租税特別措置法                                |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/del_flg         | 1                                             |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/detailedLawType | 法律                                          |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/lawID           | 昭和２１年法律第１５号                        |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/lawNum          | 昭和２１年法律第１５号                        |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/lawTitle        | 租税特別措置法                                |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/lawType         | http://lod4all.net/law/ontology/Act           |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/year            | http://lod4all.net/law/ontology/昭和21        |
+
 Subject として
 http://lod4all.net/law/resource/332AC0000000026とhttp://lod4all.net/law/resource/昭和２１年法律第１５号★　が取得される。後者は　lawp:del_flg 1 により廃止法令であることがわかる。
 
