@@ -113,7 +113,6 @@ prefix cnt: <http://www.w3.org/2011/content#>
 
 - 年号（lawo:Nengo） 
 -- time:year で西暦年
-
 - 並立接続詞類(lawo:ParallelMarker)
 - 文構造タグ
 
