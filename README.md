@@ -9,14 +9,6 @@
 
 今後は、自治体の条例などにも適用することで、地域の課題解決支援や、法令・条例に関するQAチャットボットなどの開発を考えています。
 
-## データ説明
-
-- 法令LODは日本の法令間のリンク情報や用語定義を抽出してLinked Data化したものです。
-- オリジナルのデータセットはeLawsのデータセット(https://elaws.e-gov.go.jp/download/lawdownload.html)です。
-- 今回のバージョンは、2019.9.30までにeLawsにアップロードされたデータを反映しています。
-- 略称法令名はeLaws の https://elaws.e-gov.go.jp/search/html/all.html を反映しています。
--  廃止法令は、国会図書館の廃止法令検索、eGov廃止法令一覧がありますが、データとしての取得が困難なので、現在は eLawsの中に登録されているものと、https://www.ron.gr.jp/law/law_hais.htm にある廃止された法令の一覧より作成しています（ただし、このサイトは2011.11以降メインテナンスされていません）。
-
 ## ダウンロード
 以下のURLよりダウンロードください。
 
@@ -32,6 +24,14 @@ http://lod4all.net/law/rdf/e-laws-lod.tar.gz
 lod4all-contact [at] ml.labs.fujitsu.com ( [at] を@に置き換えてください。)
 
 ## データセット説明
+
+### 概要
+
+- 法令LODは日本の法令間のリンク情報や用語定義を抽出してLinked Data化したものです。
+- オリジナルのデータセットはeLawsのデータセット(https://elaws.e-gov.go.jp/download/lawdownload.html)です。
+- 今回のバージョンは、2019.9.30までにeLawsにアップロードされたデータを反映しています。
+- 略称法令名はeLaws の https://elaws.e-gov.go.jp/search/html/all.html を反映しています。
+-  廃止法令は、国会図書館の廃止法令検索、eGov廃止法令一覧がありますが、データとしての取得が困難なので、現在は eLawsの中に登録されているものと、https://www.ron.gr.jp/law/law_hais.htm にある廃止された法令の一覧より作成しています（ただし、このサイトは2011.11以降メインテナンスされていません）。
 
 ### 名前空間
 
