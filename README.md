@@ -122,12 +122,7 @@ prefix cnt: <http://www.w3.org/2011/content#>
 ### 法令名称から法令情報の取得
 
 ```sparql
-prefix law: <http://lod4all.net/law/resource/>
 prefix lawp: <http://lod4all.net/law/property/>
-prefix lawo: <http://lod4all.net/law/ontology/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix oa: <http://www.w3.org/ns/oa#>
   
 select * 
   where {
@@ -138,48 +133,160 @@ select *
 Subject として
 http://lod4all.net/law/resource/332AC0000000026とhttp://lod4all.net/law/resource/昭和２１年法律第１５号★　が取得される。後者は　lawp:del_flg 1 により廃止法令であることがわかる。
 
+### 略称名からの検索
 
-### 特定の法令のある条項の文章の取得
+- "中央省庁等改革関連法"と呼ばれる法令は？
+
+```sparql
+prefix lawp: <http://lod4all.net/law/property/>
+  
+select * 
+  where {
+?s  lawp:altLabel "中央省庁等改革関連法";
+     lawp:lawTitle ?title;
+     lawp:lawNum ?num .
+} 
+```
+
+### 公布年と法令種別での絞り込み
+
+- 令和元年に公布された法律(lawo:Act）。
+
+```sparql
+prefix lawp: <http://lod4all.net/law/property/>
+prefix lawo: <http://lod4all.net/law/ontology/>
+  
+select ?title ?num
+  where {
+?s  lawp:year lawo:令和1;
+lawp:lawTitle ?title;
+lawp:lawNum ?num;
+lawp:lawType lawo:Act.
+} 
+```
+
+
+### 特定の法令のある条項の構造表示HTMLの取得
+
+- 租税特別措置法第70条の４
+- 法令名（lawp:lawTitle）と、その法令に属する条項の条番号（lawp:article)を指定する。配下にある項、号もとれてくるので、lawp:clauseTypeを指定して項（lawo:Article)のみに絞る。
+- 構造表示用のhtml(lawp:html)を取り出す。
+- 構造表示用のhtmlは条単位に存在する。uriをクリックすることで、法令文が構造化されて表示される
+
 ```sparql
 prefix law: <http://lod4all.net/law/resource/>
 prefix lawp: <http://lod4all.net/law/property/>
 prefix lawo: <http://lod4all.net/law/ontology/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix oa: <http://www.w3.org/ns/oa#>
 prefix cnt: <http://www.w3.org/2011/content#> 
 prefix doco: <http://purl.org/spar/doco/>
   
-select ?para ?item ?p ?o ?sentence 
+select *
   where {
-?s a doco:Sentence;
-cnt:chars ?sentence;
-lawp:clause ?clause .
-?clause lawp:upper*  law:332AC0000000026_70-4;
-lawp:index ?index;
-lawp:paragraph ?para;
-lawp:item ?item.
-?s ?p ?o .
- } ORDER BY ?index
+    values (?uri) {(law:332AC0000000026_70-4)} 
+    ?law lawp:lawTitle "租税特別措置法".
+    ?article lawp:clauseType lawo:Article;
+                  lawp:law ?law;
+                  lawp:article "70-4";
+                  lawp:html ?html.
+ }
 ```
+ 
+### 特定の法令のある条項の本文の取得
+
+- 租税特別措置法第70条の4の法令本文（法令条項の指定は、ここでは簡易的にURIを利用する）
+- 上記の法令条項のURIはlaw:332AC0000000026_70-4
+- 各文はlawo:Sentenceに格納されていて、lawo:Sentenceはどの条項に属しているかがある（lawp:clause)
+- 各条項は上位条項をたどれる（lawp:upper)
+- 条項は項番号(lawp:paragraph)、号番号(lawp:item)を持つが、枝番号もあるので、ソートにはlawp:indxを利用する
+- 各条項内の文の順序はdoco:indexの値を利用する
+
+```sparql
+prefix law: <http://lod4all.net/law/resource/>
+prefix lawp: <http://lod4all.net/law/property/>
+prefix cnt: <http://www.w3.org/2011/content#> 
+prefix doco: <http://purl.org/spar/doco/>
+  
+select ?para ?item ?sentence 
+  where {
+    values (?uri) {(law:332AC0000000026_70-4)}
+    ?s a doco:Sentence;
+    cnt:chars ?sentence;
+    lawp:clause ?clause;
+    doco:index ?sentence_no .
+    ?clause lawp:upper*  ?uri;
+    lawp:index ?index;
+    lawp:paragraph ?para;
+    lawp:item ?item.
+ } ORDER BY ?index ?sentence_no
+```
+
+### 特定の法令条項を参照している法令の取得
+
+- 租税特別措置法第70条の4を参照している法令。
+- 上記条項のURIは　law:332AC0000000026_70-4_1
+- 法令参照(lawo:ReferLaw)はoa:hasTargetが参照元情報、oa:hasBodyが参照先情報。
+- 参照先(oa:hasBody)は法令の条項なので law:332AC0000000026_70-4_1を指定する
+- 参照元は法令文字列参照(oa:SpecificResource)なので、法令文情報(oa:hasSource)を取り、その法令文が属する法令(lawp:law)のタイトルをとる
+
+```
+prefix law: <http://lod4all.net/law/resource/>
+prefix lawp: <http://lod4all.net/law/property/>
+prefix lawo: <http://lod4all.net/law/ontology/>
+prefix oa: <http://www.w3.org/ns/oa#>
+  
+select distinct ?title 
+  where {
+    ?s a lawo:ReferLaw;
+         oa:hasBody law:332AC0000000026_70-4_1;
+         oa:hasTarget ?target.
+    ?target oa:hasSource ?sentence .
+    ?sentence lawp:law ?law .
+    ?law lawp:lawTitle ?title .
+ } order by ?law
+```
+
+### 法令全体での参照元法令
+
+- 租税特別措置法を参照している法令
+- 法令参照の参照先の条項の属する法令(lawp:law)に租税特別措置法（law:332AC0000000026）を指定する
+- 参照回数の頻度順にソートする
+
+```sparql
+prefix law: <http://lod4all.net/law/resource/>
+prefix lawp: <http://lod4all.net/law/property/>
+prefix lawo: <http://lod4all.net/law/ontology/>
+prefix oa: <http://www.w3.org/ns/oa#>
+  
+select distinct ?title (count(?title) as ?count)
+  where {
+    ?s a lawo:ReferLaw;
+         oa:hasBody/lawp:law law:332AC0000000026;
+         oa:hasTarget ?target.
+    ?target oa:hasSource ?sentence .
+    ?sentence lawp:law ?law .
+    ?law lawp:lawTitle ?title .
+ } order by desc(?count)
+
+ ```
 
 ### 法令による定義語の違い
 
+- 「内国法人」という用語の定義を各法令で確認
+- 用語定義はlawo:Definition。oa:hasBody に定義語情報、oa:hasTargetに定義本体がある
+- 文の属する条項の条番号(lawp:article)も示す
+- 条番号は枝番もあるので文字列型。ソートするにはlawp:indexを利用する
+
 ```sparql
-prefix law: <http://lod4all.net/law/resource/>
 prefix lawp: <http://lod4all.net/law/property/>
-prefix lawo: <http://lod4all.net/law/ontology/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix oa: <http://www.w3.org/ns/oa#>
-prefix cnt: <http://www.w3.org/2011/content#> 
-prefix doco: <http://purl.org/spar/doco/>
   
-select ?law ?body 
+select ?law ?article ?body 
   where {
 [] oa:hasBody [lawp:term "内国法人"; 
                         lawp:body ?body];
  oa:hasTarget/oa:hasSource ?at .
-?at lawp:law/rdfs:label ?law
+?at lawp:law/rdfs:label ?law;
+       lawp:clause/lawp:article ?article
  } 
 ```
