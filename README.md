@@ -162,21 +162,28 @@ select *
      ?p ?o} order by ?s
 ```
 #### 実行結果
-| s                                               | title                          | num                              |
-|-------------------------------------------------|--------------------------------|----------------------------------|
-| http://lod4all.net/law/resource/411AC0000000089 | 内閣府設置法                   | 平成十一年法律第八十九号         |
-| http://lod4all.net/law/resource/411AC0000000091 | 総務省設置法                   | 平成十一年法律第九十一号         |
-| http://lod4all.net/law/resource/411AC0000000093 | 法務省設置法                   | 平成十一年法律第九十三号         |
-| http://lod4all.net/law/resource/411AC0000000094 | 外務省設置法                   | 平成十一年法律第九十四号         |
-| http://lod4all.net/law/resource/411AC0000000095 | 財務省設置法                   | 平成十一年法律第九十五号         |
-| http://lod4all.net/law/resource/411AC0000000096 | 文部科学省設置法               | 平成十一年法律第九十六号         |
-| http://lod4all.net/law/resource/411AC0000000097 | 厚生労働省設置法               | 平成十一年法律第九十七号         |
-| http://lod4all.net/law/resource/411AC0000000098 | 農林水産省設置法               | 平成十一年法律第九十八号         |
-| http://lod4all.net/law/resource/411AC0000000099 | 経済産業省設置法               | 平成十一年法律第九十九号         |
-| http://lod4all.net/law/resource/411AC0000000100 | 国土交通省設置法               | 平成十一年法律第百号             |
-| http://lod4all.net/law/resource/411AC0000000101 | 環境省設置法                   | 平成十一年法律第百一号           |
-| http://lod4all.net/law/resource/411AC0000000103 | 独立行政法人通則法             | 平成十一年法律第百三号           |
-| http://lod4all.net/law/resource/412M50002100006 | 厚生労働省所管補助金等交付規則 | 平成十二年厚生省・労働省令第六号 |
+| s                                                      | p                                               | o                                             |
+|--------------------------------------------------------|-------------------------------------------------|-----------------------------------------------|
+| http://lod4all.net/law/resource/332AC0000000026        | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://lod4all.net/law/ontology/Law           |
+| http://lod4all.net/law/resource/332AC0000000026        | http://www.w3.org/2000/01/rdf-schema#label      | 租税特別措置法                                |
+| http://lod4all.net/law/resource/332AC0000000026        | http://www.w3.org/2000/01/rdf-schema#seeAlso    | http://ja.dbpedia.org/resource/租税特別措置法 |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/del_flg         | 0                                             |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/detailedLawType | 法律                                          |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/lawID           | 332AC0000000026                               |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/lawNum          | 昭和三十二年法律第二十六号                    |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/lawTitle        | 租税特別措置法                                |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/lawType         | http://lod4all.net/law/ontology/Act           |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/year            | http://lod4all.net/law/ontology/昭和32        |
+| http://lod4all.net/law/resource/332AC0000000026        | http://lod4all.net/law/property/altLabel        | 租特法                                        |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://lod4all.net/law/ontology/Law           |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://www.w3.org/2000/01/rdf-schema#label      | 租税特別措置法                                |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/del_flg         | 1                                             |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/detailedLawType | 法律                                          |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/lawID           | 昭和２１年法律第１５号                        |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/lawNum          | 昭和２１年法律第１５号                        |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/lawTitle        | 租税特別措置法                                |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/lawType         | http://lod4all.net/law/ontology/Act           |
+| http://lod4all.net/law/resource/昭和２１年法律第１５号 | http://lod4all.net/law/property/year            | http://lod4all.net/law/ontology/昭和21        |
 
 Subject として
 http://lod4all.net/law/resource/332AC0000000026とhttp://lod4all.net/law/resource/昭和２１年法律第１５号★　が取得される。後者は　lawp:del_flg 1 により廃止法令であることがわかる。
@@ -195,6 +202,25 @@ select *
      lawp:lawNum ?num .
 } 
 ```
+
+#### 実行結果
+
+| s                                               | title                          | num                              |
+|-------------------------------------------------|--------------------------------|----------------------------------|
+| http://lod4all.net/law/resource/411AC0000000089 | 内閣府設置法                   | 平成十一年法律第八十九号         |
+| http://lod4all.net/law/resource/411AC0000000091 | 総務省設置法                   | 平成十一年法律第九十一号         |
+| http://lod4all.net/law/resource/411AC0000000093 | 法務省設置法                   | 平成十一年法律第九十三号         |
+| http://lod4all.net/law/resource/411AC0000000094 | 外務省設置法                   | 平成十一年法律第九十四号         |
+| http://lod4all.net/law/resource/411AC0000000095 | 財務省設置法                   | 平成十一年法律第九十五号         |
+| http://lod4all.net/law/resource/411AC0000000096 | 文部科学省設置法               | 平成十一年法律第九十六号         |
+| http://lod4all.net/law/resource/411AC0000000097 | 厚生労働省設置法               | 平成十一年法律第九十七号         |
+| http://lod4all.net/law/resource/411AC0000000098 | 農林水産省設置法               | 平成十一年法律第九十八号         |
+| http://lod4all.net/law/resource/411AC0000000099 | 経済産業省設置法               | 平成十一年法律第九十九号         |
+| http://lod4all.net/law/resource/411AC0000000100 | 国土交通省設置法               | 平成十一年法律第百号             |
+| http://lod4all.net/law/resource/411AC0000000101 | 環境省設置法                   | 平成十一年法律第百一号           |
+| http://lod4all.net/law/resource/411AC0000000103 | 独立行政法人通則法             | 平成十一年法律第百三号           |
+| http://lod4all.net/law/resource/412M50002100006 | 厚生労働省所管補助金等交付規則 | 平成十二年厚生省・労働省令第六号 |
+
 
 ### 公布年と法令種別での絞り込み
 
