@@ -417,7 +417,7 @@ prefix oa: <http://www.w3.org/ns/oa#>
   
 select ?law ?article ?body 
   where {
-[] oa:hasBody [lawp:term "内国法人"; 
+[] oa:hasBody [lawp:term "内国法人"@ja; 
                         lawp:body ?body];
  oa:hasTarget/oa:hasSource ?at .
 ?at lawp:law/rdfs:label ?law;
