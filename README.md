@@ -158,7 +158,7 @@ prefix lawp: <http://lod4all.net/law/property/>
   
 select * 
   where {
-?s  lawp:lawTitle "租税特別措置法";
+?s  lawp:lawTitle "租税特別措置法"@ja;
      ?p ?o} order by ?s
 ```
 #### 実行結果
@@ -197,7 +197,7 @@ prefix lawp: <http://lod4all.net/law/property/>
   
 select * 
   where {
-?s  lawp:altLabel "中央省庁等改革関連法";
+?s  lawp:altLabel "中央省庁等改革関連法"@ja;
      lawp:lawTitle ?title;
      lawp:lawNum ?num .
 } 
@@ -262,7 +262,7 @@ prefix doco: <http://purl.org/spar/doco/>
 select *
   where {
     values (?uri) {(law:332AC0000000026_70-4)} 
-    ?law lawp:lawTitle "租税特別措置法".
+    ?law lawp:lawTitle "租税特別措置法"@ja .
     ?article lawp:clauseType lawo:Article;
                   lawp:law ?law;
                   lawp:article "70-4";
