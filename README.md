@@ -21,28 +21,7 @@ http://lod4all.net/law/rdf/e-laws-lod.tar.gz
 lod4all-contact [at] ml.labs.fujitsu.com ( [at] を@に置き換えてください。)
 
 ## 構造表示の例
-[仮登記担保契約に関する法律](https://elaws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0500/detail?lawId=353AC0000000078)は以下のHTMLのように解析されます。
-
-- http://lod4all.net/law/page/353AC0000000078/article_1.html
-- http://lod4all.net/law/page/353AC0000000078/article_2.html
-- http://lod4all.net/law/page/353AC0000000078/article_3.html
-- http://lod4all.net/law/page/353AC0000000078/article_4.html
-- http://lod4all.net/law/page/353AC0000000078/article_5.html
-- http://lod4all.net/law/page/353AC0000000078/article_6.html
-- http://lod4all.net/law/page/353AC0000000078/article_7.html
-- http://lod4all.net/law/page/353AC0000000078/article_8.html
-- http://lod4all.net/law/page/353AC0000000078/article_9.html
-- http://lod4all.net/law/page/353AC0000000078/article_10.html
-- http://lod4all.net/law/page/353AC0000000078/article_11.html
-- http://lod4all.net/law/page/353AC0000000078/article_12.html
-- http://lod4all.net/law/page/353AC0000000078/article_13.html
-- http://lod4all.net/law/page/353AC0000000078/article_14.html
-- http://lod4all.net/law/page/353AC0000000078/article_15.html
-- http://lod4all.net/law/page/353AC0000000078/article_16.html
-- http://lod4all.net/law/page/353AC0000000078/article_17.html
-- http://lod4all.net/law/page/353AC0000000078/article_18.html
-- http://lod4all.net/law/page/353AC0000000078/article_19.html
-- http://lod4all.net/law/page/353AC0000000078/article_20.html
+[法令KGダッシュボード](http://lod4all.net/frontend/index/applicationtop?app_id=lawKGFrontend)より確認できます。
 
 ## データセット説明
 
