@@ -21,7 +21,7 @@ http://lod4all.net/law/rdf/e-laws-lod.tar.gz
 lod4all-contact [at] ml.labs.fujitsu.com ( [at] を@に置き換えてください。)
 
 ## 構造表示の例
-[法令KGダッシュボード](http://lod4all.net/frontend/index/applicationtop?app_id=lawKGFrontend)より確認できます。
+[日本の法令LODダッシュボード](http://lod4all.net/frontend/index/applicationtop?app_id=lawKGFrontend)より確認できます。
 
 ## データセット説明
 
